@@ -62,12 +62,12 @@ for i in categorical_cols:
 print("\nLength of stalcDF_N after dropping textual columns:",len(stalcDF_N.columns)) #should print 31
 
 
-###Actual encoding happens here
+#Some feature manipulation (create new columns based on mean of others)
+stalcDF_N['Avg_Grade'] = stalcDF_N[['G1', 'G2','G3']].mean(axis=1) 
+stalcDF_N.drop(['G1', 'G2','G3'], axis=1, inplace=True) #drop the 3 colums
 
-stalcDF['Avg_Grade'] = stalcDF[['G1', 'G2','G3']].mean(axis=1) 
-stalcDF.drop(['G1', 'G2','G3'], axis=1, inplace=True) #drop the 3 colums
 #Create the new merged and rounded-up column for Alcohol Consumption 
-stalcDF['Avg_Alc_Cnsmptn'] = stalcDF[['Dalc', 'Walc']].mean(axis=1) 
-stalcDF.drop(['G1', 'G2','G3'], axis=1, inplace=True) #drop the 3 colums
+stalcDF_N['Avg_Alc_Cnsmptn'] = stalcDF_N[['Dalc', 'Walc']].mean(axis=1) 
+stalcDF_N.drop(['G1', 'G2','G3'], axis=1, inplace=True) #drop the 3 colums
 
 
